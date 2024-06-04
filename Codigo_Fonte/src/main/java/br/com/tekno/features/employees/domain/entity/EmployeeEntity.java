@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class EmployeeEntity {
     
+
    
     private int id_employee;
     private String registration;
@@ -84,6 +85,65 @@ public class EmployeeEntity {
         this.fk_ticket_type = fk_ticket_type;
     }
 
+    // Get infos to edit Employee data
+    public EmployeeEntity(int id_employee, String registration, String name_employee, String email, Date entry_date,
+            Date contract_date, String date, String photo) {
+        this.id_employee = id_employee;
+        this.registration = registration;
+        this.name_employee = name_employee;
+        this.email = email;
+        this.entry_date = entry_date;
+        this.contract_date = contract_date;
+        this.date = date;
+        this.photo = photo;
+    }
+
+    //Get infos to edit Docouments data
+    public EmployeeEntity(int id_documents, String nro_title, String electoral_zone, String electoral_section,
+    int nro_rg, String state_rg, int nro_work_card, String series_work_card, int cpf) {
+        this.id_documents = id_documents;
+        this.nro_title = nro_title;
+        this.electoral_zone = electoral_zone;
+        this.electoral_section = electoral_section;
+        this.nro_rg = nro_rg;
+        this.state_rg = state_rg;
+        this.nro_work_card = nro_work_card;
+        this.series_work_card = series_work_card;
+        this.cpf = cpf;
+    }
+
+    //Get infos to edit Contacts data
+    public EmployeeEntity(int id_contact, int phone, String address, String district, String city, String states,
+    String uf, int cep) {
+        this.id_contact = id_contact;
+        this.phone = phone;
+        this.address = address;
+        this.district = district;
+        this.city = city;
+        this.states = states;
+        this.uf = uf;
+        this.cep = cep;
+    }
+
+    //Get infos to edit Ticket data
+    public EmployeeEntity(int id_ticket, int identification, String code_operator, String code_line, int card_number,
+    int qtt_daily_ticker, int ticket_value, int fk_ticket_type) {
+        this.id_ticket = id_ticket;
+        this.identification = identification;
+        this.code_operator = code_operator;
+        this.code_line = code_line;
+        this.card_number = card_number;
+        this.qtt_daily_ticker = qtt_daily_ticker;
+        this.ticket_value = ticket_value;
+        this.fk_ticket_type = fk_ticket_type;
+    }
+
+    //Get infos to edit Login data
+    public EmployeeEntity(int id_access, String login, String password) {
+        this.id_access = id_access;
+        this.login = login;
+        this.password = password;
+    }
 
     public int getId_employee() {
         return id_employee;
