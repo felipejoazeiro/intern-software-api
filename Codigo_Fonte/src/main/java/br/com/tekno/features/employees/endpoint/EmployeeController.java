@@ -22,32 +22,31 @@ public class EmployeeController {
     @Route(path = "editEmployee", methods=Route.HttpMethod.POST)
     @Produces(MediaType.APPLICATION_JSON)
     public ResultSet editEmployee(@Body EmployeeEntity dados) throws EmployeeErrors{
-        throw new EmployeeErrors("Algo");
+        return new EmployeeUsecase().editEmployee(dados);
     }
 
     @Route(path = "editContact", methods=Route.HttpMethod.POST)
     @Produces(MediaType.APPLICATION_JSON)
     public ResultSet editContact(@Body EmployeeEntity dados) throws EmployeeErrors{
-        throw new EmployeeErrors("Algo");
+        return new EmployeeUsecase().editContacts(dados);
     }
 
     @Route(path = "editDocuments", methods=Route.HttpMethod.POST)
     @Produces(MediaType.APPLICATION_JSON)
     public ResultSet editDocuments(@Body EmployeeEntity dados) throws EmployeeErrors{
-        throw new EmployeeErrors("Algo");
+        return new EmployeeUsecase().editDocuments(dados);
     }
 
     @Route(path = "editTicket", methods=Route.HttpMethod.POST)
     @Produces(MediaType.APPLICATION_JSON)
     public ResultSet editTicket(@Body EmployeeEntity dados) throws EmployeeErrors{
-        throw new EmployeeErrors("Algo");
-
+        return new EmployeeUsecase().editTicket(dados);
     }
 
     @Route(path = "editAccess", methods=Route.HttpMethod.POST)
     @Produces(MediaType.APPLICATION_JSON)
     public ResultSet editAccess(@Body EmployeeEntity dados) throws EmployeeErrors{
-        throw new EmployeeErrors("Algo");
+        return new EmployeeUsecase().editLogin(dados);
     }
 
 }
