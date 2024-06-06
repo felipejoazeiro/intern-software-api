@@ -4,8 +4,6 @@ import java.sql.Date;
 
 public class EmployeeEntity {
     
-
-   
     private int id_employee;
     private String registration;
     private String name_employee;
