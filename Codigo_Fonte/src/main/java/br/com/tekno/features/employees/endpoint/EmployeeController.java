@@ -49,4 +49,16 @@ public class EmployeeController {
         return new EmployeeUsecase().editLogin(dados);
     }
 
+    @Route(path = "deactiveEmployee", methods = Route.HttpMethod.POST)
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResultSet deactiveEmployee(@Body int id) throws EmployeeErrors{
+        return new EmployeeUsecase().deactiveLogin(id);
+    }
+
+    @Route(path = "activeEmployee", methods = Route.HttpMethod.POST)
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResultSet activeEmployee(@Body EmployeeEntity dados) throws EmployeeErrors{
+        throw new EmployeeErrors("algo");
+    }
+
 }

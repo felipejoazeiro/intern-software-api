@@ -54,4 +54,18 @@ public class EmployeeUsecase {
         }
         return new EmployeeDatasource().editAccess(dados);
     }
+
+    public ResultSet deactiveLogin(int id) throws EmployeeErrors{
+        if(id <= 0){
+            throw new EmployeeErrorMissingData("Dados faltantes");
+        }
+        return new EmployeeDatasource().deactiveEmployee(id);
+    }
+
+    public ResultSet activeLogin(int id) throws EmployeeErrors {
+        if(id <= 0){
+            throw new EmployeeErrorMissingData("Dados faltantes");
+        }
+        return new EmployeeDatasource().activeEmployee(id);
+    }
 }

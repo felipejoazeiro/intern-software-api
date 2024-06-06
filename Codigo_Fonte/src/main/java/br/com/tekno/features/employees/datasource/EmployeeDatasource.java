@@ -283,4 +283,29 @@ public class EmployeeDatasource {
             throw new EmployeeErrors(e.getMessage());
         }
     }
+
+    public ResultSet deactiveEmployee(int id) throws EmployeeErrors {
+        try {
+            var query = "UPDATE employee SET active_employee = false WHERE id = ?;";
+            var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
+
+            prepareStatement.setInt(1, id);
+
+            return prepareStatement.executeQuery();
+        } catch (SQLException e) {
+            throw new EmployeeErrors(e.getMessage());
+        }
+    }
+
+    public ResultSet activeEmployee(int id) throws EmployeeErrors {
+        try {
+            var query = "UPDATE employee SET active_employee = true WHERE id = ?;";
+            var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
+
+            prepareStatement.setInt(1, id);
+            return prepareStatement.executeQuery();
+        } catch (SQLException e) {
+            throw new EmployeeErrors(e.getMessage());
+        }
+    }
 }

@@ -3,8 +3,9 @@ package br.com.tekno.features.employees.domain.entity;
 import java.sql.Date;
 
 public class EmployeeEntity {
-    
+
     private int id_employee;
+    private boolean active_employee;
     private String registration;
     private String name_employee;
     private String email;
@@ -47,11 +48,15 @@ public class EmployeeEntity {
     private String password;
 
     // Get infos for new Employee
-    public EmployeeEntity(String registration, String name_employee, String email, Date entry_date, Date contract_date, String photo,
-    String date, int fk_cargo, String nro_title, String electoral_zone, String electoral_section, int nro_rg, String state_rg,
-    int nro_work_card, String series_work_card, int cpf, int phone, String address, String district,
-    String city, String states, String uf, int cep, int identification,String code_operator, String code_line, int card_number,
-    int qtt_daily_ticker, int ticket_value, int fk_ticket_type) {
+    public EmployeeEntity(Boolean active_employee, String registration, String name_employee, String email,
+            Date entry_date, Date contract_date, String photo,
+            String date, int fk_cargo, String nro_title, String electoral_zone, String electoral_section, int nro_rg,
+            String state_rg,
+            int nro_work_card, String series_work_card, int cpf, int phone, String address, String district,
+            String city, String states, String uf, int cep, int identification, String code_operator, String code_line,
+            int card_number,
+            int qtt_daily_ticker, int ticket_value, int fk_ticket_type) {
+        this.active_employee = active_employee;
         this.registration = registration;
         this.name_employee = name_employee;
         this.email = email;
@@ -84,8 +89,10 @@ public class EmployeeEntity {
     }
 
     // Get infos to edit Employee data
-    public EmployeeEntity(int id_employee, String registration, String name_employee, String email, Date entry_date,
+    public EmployeeEntity(int id_employee, Boolean active_employee, String registration, String name_employee,
+            String email, Date entry_date,
             Date contract_date, String date, String photo) {
+        this.active_employee = active_employee;
         this.id_employee = id_employee;
         this.registration = registration;
         this.name_employee = name_employee;
@@ -96,9 +103,9 @@ public class EmployeeEntity {
         this.photo = photo;
     }
 
-    //Get infos to edit Docouments data
+    // Get infos to edit Docouments data
     public EmployeeEntity(int id_documents, String nro_title, String electoral_zone, String electoral_section,
-    int nro_rg, String state_rg, int nro_work_card, String series_work_card, int cpf) {
+            int nro_rg, String state_rg, int nro_work_card, String series_work_card, int cpf) {
         this.id_documents = id_documents;
         this.nro_title = nro_title;
         this.electoral_zone = electoral_zone;
@@ -110,9 +117,9 @@ public class EmployeeEntity {
         this.cpf = cpf;
     }
 
-    //Get infos to edit Contacts data
+    // Get infos to edit Contacts data
     public EmployeeEntity(int id_contact, int phone, String address, String district, String city, String states,
-    String uf, int cep) {
+            String uf, int cep) {
         this.id_contact = id_contact;
         this.phone = phone;
         this.address = address;
@@ -123,9 +130,9 @@ public class EmployeeEntity {
         this.cep = cep;
     }
 
-    //Get infos to edit Ticket data
+    // Get infos to edit Ticket data
     public EmployeeEntity(int id_ticket, int identification, String code_operator, String code_line, int card_number,
-    int qtt_daily_ticker, int ticket_value, int fk_ticket_type) {
+            int qtt_daily_ticker, int ticket_value, int fk_ticket_type) {
         this.id_ticket = id_ticket;
         this.identification = identification;
         this.code_operator = code_operator;
@@ -136,137 +143,179 @@ public class EmployeeEntity {
         this.fk_ticket_type = fk_ticket_type;
     }
 
-    //Get infos to edit Login data
+    // Get infos to edit Login data
     public EmployeeEntity(int id_access, String login, String password) {
         this.id_access = id_access;
         this.login = login;
         this.password = password;
     }
 
+    public Boolean getActive_employee() {
+        return active_employee;
+    }
+
     public int getId_employee() {
         return id_employee;
     }
+
     public String getRegistration() {
         return registration;
     }
+
     public String getName_employee() {
         return name_employee;
     }
+
     public String getEmail() {
         return email;
     }
+
     public Date getEntry_date() {
         return entry_date;
     }
+
     public Date getContract_date() {
         return contract_date;
     }
+
     public String getDate() {
         return date;
     }
+
     public String getPhoto() {
         return photo;
     }
+
     public int getFk_documents() {
         return fk_documents;
     }
+
     public int getFk_employee_contact() {
         return fk_employee_contact;
     }
+
     public int getFk_ticket() {
         return fk_ticket;
     }
+
     public int getFk_access() {
         return fk_access;
     }
+
     public int getFk_cargo() {
         return fk_cargo;
     }
+
     public int getId_documents() {
         return id_documents;
     }
+
     public String getNro_title() {
         return nro_title;
     }
+
     public String getElectoral_zone() {
         return electoral_zone;
     }
+
     public String getElectoral_section() {
         return electoral_section;
     }
+
     public int getNro_rg() {
         return nro_rg;
     }
+
     public String getState_rg() {
         return state_rg;
     }
+
     public int getNro_work_card() {
         return nro_work_card;
     }
+
     public String getSeries_work_card() {
         return series_work_card;
     }
+
     public int getCpf() {
         return cpf;
     }
+
     public int getId_contact() {
         return id_contact;
     }
+
     public int getPhone() {
         return phone;
     }
+
     public String getAddress() {
         return address;
     }
+
     public String getDistrict() {
         return district;
     }
+
     public String getCity() {
         return city;
     }
+
     public String getStates() {
         return states;
     }
+
     public String getUf() {
         return uf;
     }
+
     public int getCep() {
         return cep;
     }
+
     public int getId_ticket() {
         return id_ticket;
     }
+
     public int getIdentification() {
         return identification;
     }
+
     public String getCode_operator() {
         return code_operator;
     }
+
     public String getCode_line() {
         return code_line;
     }
+
     public int getCard_number() {
         return card_number;
     }
+
     public int getQtt_daily_ticker() {
         return qtt_daily_ticker;
     }
+
     public int getTicket_value() {
         return ticket_value;
     }
+
     public int getFk_ticket_type() {
         return fk_ticket_type;
     }
+
     public int getId_access() {
         return id_access;
     }
+
     public String getLogin() {
         return login;
     }
+
     public String getPassword() {
         return password;
     }
-
-
 
 }
