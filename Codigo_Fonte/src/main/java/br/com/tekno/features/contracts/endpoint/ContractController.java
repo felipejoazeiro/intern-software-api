@@ -60,4 +60,17 @@ public class ContractController {
         return new ContractUsecase().alterContractInfos(dados);
     }
 
+    @Route(path = "deactiveContract", methods = Route.HttpMethod.POST)
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResultSet deactiveContract(@Body int id) throws ContractErrors {
+        return new ContractUsecase().deactiveContract(id);
+    }
+
+    @Route(path = "activeContract", methods = Route.HttpMethod.POST)
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResultSet activeContract(@Body int id) throws ContractErrors {
+        return new ContractUsecase().activeContract(id);
+    }
+
+
 }

@@ -40,4 +40,12 @@ public class ContractUsecase {
         return new ContractsDatasource().alterContractInfos(dados);
     }
 
+    public ResultSet deactiveContract(int id) throws ContractErrors{
+        return new ContractsDatasource().deactiveContract(id);
+    }
+
+    public ResultSet activeContract(int id) throws ContractErrors{
+        return new ContractsDatasource().activeContract(id);
+    }
+
 }
