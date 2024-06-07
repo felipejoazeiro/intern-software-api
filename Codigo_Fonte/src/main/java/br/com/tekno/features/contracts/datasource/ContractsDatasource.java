@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 
 import br.com.tekno.features.contracts.domain.entity.ContractEntity;
 import br.com.tekno.features.contracts.domain.errors.ContractErrors;
+import br.com.tekno.features.employees.domain.entity.EmployeeEntity;
 import br.com.tekno.services.connection.PostgresConnection;
 
 public class ContractsDatasource {
@@ -249,4 +250,143 @@ public class ContractsDatasource {
         }
     }
 
+    public ResultSet alterContract(ContractEntity dados) throws ContractErrors {
+        try {
+            var query = "UPDATE contract SET code_contract = ?, name_contract = ?, acronym = ?, research = ?, uses_cpf = ? WHERE id = ?;";
+            var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
+
+            prepareStatement.setString(1, dados.getCode_contract());
+            prepareStatement.setString(2, dados.getName_contract());
+            prepareStatement.setString(3, dados.getAcronymEmployee());
+            prepareStatement.setBoolean(4, dados.isResearch());
+            prepareStatement.setBoolean(5, dados.isUses_cpf());
+            prepareStatement.setInt(6, dados.getIdContract());
+
+            return prepareStatement.executeQuery();
+
+        } catch (SQLException e) {
+            throw new ContractErrors(e.getMessage());
+        }
+    }
+
+    public ResultSet alterRhContract(ContractEntity dados) throws ContractErrors {
+        try {
+            var query = "UPDATE contract_rh SET hour_limit = ?, minutes_limit = ?, days_first_exp = ?, days_second_exp = ?, data_init = ?, pay_extra_hour = ?, bank_hours_compens = ?, manual_stitch = ?, pays_breakfast = ? WHERE id = ?;";
+            var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
+
+            prepareStatement.setDate(1, dados.getHour_limit());
+            prepareStatement.setDate(2, dados.getMinutes_limit());
+            prepareStatement.setInt(3, dados.getDays_first_exp());
+            prepareStatement.setInt(4, dados.getDays_second_exp());
+            prepareStatement.setDate(5, dados.getData_init());
+            prepareStatement.setBoolean(6, dados.isPay_extra_hour());
+            prepareStatement.setBoolean(7, dados.isBank_hours_compens());
+            prepareStatement.setBoolean(8, dados.isManual_stitch());
+            prepareStatement.setBoolean(9, dados.isPays_breakfast());
+            prepareStatement.setInt(10, dados.getIdRh());
+
+            return prepareStatement.executeQuery();
+
+        } catch (SQLException e) {
+            throw new ContractErrors(e.getMessage());
+        }
+    }
+
+    public ResultSet alterContractDiscount(ContractEntity dados) throws ContractErrors{
+        try {
+            var query = "UPDATE contract_discount SET disc_service = ?, disc_transport = ? , disc_transp_employee = ?, disc_labor = ?, disc_material = ?, disc_field = ?;";
+            var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
+
+            prepareStatement.setInt(1, dados.getDisc_identifier());
+            prepareStatement.setInt(2, dados.getDisc_service());
+            prepareStatement.setInt(3, dados.getDisc_transport());
+            prepareStatement.setInt(4, dados.getDisc_tranp_employee());
+            prepareStatement.setInt(5, dados.getDisc_labor());
+            prepareStatement.setInt(6, dados.getDisc_material());
+
+            return prepareStatement.executeQuery();
+        } catch (SQLException e) {
+            throw new ContractErrors(e.getMessage());
+        }
+    }
+
+    public ResultSet alterContractDates(ContractEntity dados) throws ContractErrors{
+        try {
+            var query = "UPDATE contract_dates SET date_initial = ?, date_limit = ?, date_guarantee = ?, date_proposal = ?, date_budget = ?, date_tables = ?;";
+            var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
+
+            prepareStatement.setDate(1, dados.getDate_initial());
+            prepareStatement.setDate(2, dados.getDate_limit());
+            prepareStatement.setDate(3, dados.getDate_guarantee());
+            prepareStatement.setDate(4, dados.getDate_proposal());
+            prepareStatement.setDate(5, dados.getDate_budget());
+            prepareStatement.setDate(6, dados.getDate_tables());
+
+            return prepareStatement.executeQuery();
+
+        } catch (SQLException e) {
+            throw new ContractErrors(e.getMessage());
+        }
+    }
+
+    public ResultSet alterContractValues(ContractEntity dados) throws ContractErrors{
+        try {
+            var query = "UPDATE contract_values SET acronym = ?, bdi_service = ?, bdi_material = ?, bdi_labor = ?, entry_table = ?, send_email = ? WHERE id = ?;";
+            var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
+
+            prepareStatement.setString(1, dados.getAcronymValues());
+            prepareStatement.setInt(2, dados.getBdi_service());
+            prepareStatement.setInt(3, dados.getBdi_material());
+            prepareStatement.setInt(4, dados.getBdi_labor());
+            prepareStatement.setBoolean(5, dados.isEntry_table());
+            prepareStatement.setBoolean(6, dados.isSend_email());
+            prepareStatement.setInt(7, dados.getIdValues());
+
+            return prepareStatement.executeQuery();
+        } catch (Exception e) {
+            throw new ContractErrors(e.getMessage());
+        }
+    }
+
+    public ResultSet alterContractContacts(ContractEntity dados) throws ContractErrors{
+        try {
+            var query = "UPDATE contract_contact SET address = ?, nro = ?, complement = ?, phone = ?, state = ?, city = ?, cep = ?, email = ?, contact = ? WHERE id = ?;";
+            var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
+
+            prepareStatement.setString(1, dados.getAddress());
+            prepareStatement.setInt(2, dados.getNro());
+            prepareStatement.setString(3, dados.getComplement());
+            prepareStatement.setInt(4, dados.getPhone());
+            prepareStatement.setString(5, dados.getState());
+            prepareStatement.setString(6, dados.getCity());
+            prepareStatement.setInt(7, dados.getCep());
+            prepareStatement.setString(8, dados.getEmail());
+            prepareStatement.setString(9, dados.getContact());
+            prepareStatement.setInt(10, dados.getIdContact());
+
+            return prepareStatement.executeQuery();
+
+        } catch (SQLException e) {
+            throw new ContractErrors(e.getMessage());
+        }
+    }
+
+    public ResultSet alterContractInfos(ContractEntity dados) throws ContractErrors{
+        try {
+            var query = "UPDATE contract_infos SET construction = ?, cap = ?, process = ?, info_pmoc = ?, max_employee = ? WHERE id = ?;";
+            var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
+
+            prepareStatement.setString(1, dados.getConstruction());
+            prepareStatement.setString(2, dados.getCap());
+            prepareStatement.setString(3, dados.getProcess());
+            prepareStatement.setString(4, dados.getInfo_pmoc());
+            prepareStatement.setInt(5, dados.getMax_employee());
+            prepareStatement.setInt(6, dados.getIdInfos());
+
+            return prepareStatement.executeQuery();
+
+        } catch (Exception e) {
+            throw new ContractErrors(e.getMessage());
+        }
+    }
 }

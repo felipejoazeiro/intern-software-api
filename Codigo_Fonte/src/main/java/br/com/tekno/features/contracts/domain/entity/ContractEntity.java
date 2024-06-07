@@ -212,8 +212,6 @@ public class ContractEntity {
         this.pays_breakfast = pays_breakfast;
     }
 
-
-
     public ContractEntity(int idContract, String code_contract, String name_contract, String acronymEmployee,
             boolean research, boolean active, boolean uses_cpf, int fk_contract_contact, int fk_contract_info,
             int fk_contract_dates, int fk_contract_values, int fk_contract_discount) {
