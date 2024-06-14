@@ -12,4 +12,31 @@ public class SindicateUsecase {
         return new SindicateDatasource().newSindicate(dados);
     }
 
+    public ResultSet changeSindicate(SindicateEntity daods) throws SindicateError{
+        return new SindicateDatasource().changeSind(daods);
+    }
+
+    public ResultSet changeSinCB(SindicateEntity dados) throws SindicateError {
+        return new SindicateDatasource().changeSindCB(dados);
+    }
+
+    public ResultSet changeSindVale(SindicateEntity dados) throws SindicateError{
+        return new SindicateDatasource().changeSindVale(dados);
+    }
+
+    public ResultSet changeSindBF(SindicateEntity dados) throws SindicateError{
+        return new SindicateDatasource().changeSindBF(dados);
+    }
+
+    public ResultSet changeSindAuth(SindicateEntity dados) throws SindicateError{
+        return new SindicateDatasource().changeSindAuth(dados);
+    }
+
+    public ResultSet changeSindValues(SindicateEntity dados) throws SindicateError{
+        return new SindicateDatasource().changeSindValues(dados);
+    }
+
+    public ResultSet changeSindPercents(SindicateEntity daods) throws SindicateError{
+        return new SindicateDatasource().changeSindPerc(daods);
+    }
 }

@@ -27,8 +27,36 @@ public class SindicateController {
     @Route(path = "changeSindCB", methods = Route.HttpMethod.POST)
     @Produces(MediaType.APPLICATION_JSON)
     public ResultSet changeSindicateCB(@Body SindicateEntity dados) throws SindicateError{
-        return new SindicateUsecase().newSindicate(dados);
+        return new SindicateUsecase().changeSinCB(dados);
+    }
+    
+    @Route(path = "changeSindVale", methods = Route.HttpMethod.POST)
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResultSet changeSindicateVale(@Body SindicateEntity dados) throws SindicateError{
+        return new SindicateUsecase().changeSindVale(dados);
     }
 
+    @Route(path = "changeSindBF", methods = Route.HttpMethod.POST)
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResultSet changeSindicateBF(@Body SindicateEntity dados) throws SindicateError{
+        return new SindicateUsecase().changeSindBF(dados);
+    }
+
+    @Route(path = "changeSindAuth", methods = Route.HttpMethod.POST)
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResultSet changeSindicateAuth(@Body SindicateEntity dados) throws SindicateError{
+        return new SindicateUsecase().changeSindAuth(dados);
+    }
+
+    @Route(path = "changeSindValues", methods = Route.HttpMethod.POST)
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResultSet changeSindicateValues(@Body SindicateEntity dados) throws SindicateError{
+        return new SindicateUsecase().changeSindValues(dados);
+    }
     
+    @Route(path = "changeSindPercents", methods = Route.HttpMethod.POST)
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResultSet changeSindicatePercents(@Body SindicateEntity dados) throws SindicateError{
+        return new SindicateUsecase().changeSindPercents(dados);
+    }
 }
