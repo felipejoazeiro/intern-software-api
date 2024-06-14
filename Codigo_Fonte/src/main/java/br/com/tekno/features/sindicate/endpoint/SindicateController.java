@@ -17,4 +17,18 @@ public class SindicateController {
     public ResultSet newSindicate(@Body SindicateEntity dados) throws SindicateError{
         return new SindicateUsecase().newSindicate(dados);
     }
+
+    @Route(path = "changeSindc", methods = Route.HttpMethod.POST)
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResultSet changeSindcate(@Body SindicateEntity dados) throws SindicateError{
+        return new SindicateUsecase().newSindicate(dados);
+    }
+
+    @Route(path = "changeSindCB", methods = Route.HttpMethod.POST)
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResultSet changeSindicateCB(@Body SindicateEntity dados) throws SindicateError{
+        return new SindicateUsecase().newSindicate(dados);
+    }
+
+    
 }

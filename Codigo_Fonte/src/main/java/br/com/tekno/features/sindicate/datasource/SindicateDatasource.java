@@ -257,4 +257,164 @@ public class SindicateDatasource {
         }
     }
 
+    public ResultSet changeSind(SindicateEntity dados) throws SindicateError{
+        try {
+            var query = "UPDATE sindicate SET nro_register_cct = ?, date_start_cct = ?, date_finish_cct = ? WHERE id = ?;";
+            var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
+
+            prepareStatement.setString(1, dados.getNro_register_cct());
+            prepareStatement.setDate(2, dados.getDate_start_cct());
+            prepareStatement.setDate(3, dados.getDate_finish_cct());
+            prepareStatement.setInt(4, dados.getIdSindicate());
+
+            return prepareStatement.executeQuery();
+        } catch (SQLException e) {
+            throw new SindicateError(e.getMessage());
+        }
+    }
+
+    public ResultSet changeSindCB(SindicateEntity dados) throws SindicateError{
+        try {
+            var query = "UPDATE sindicate_cesta_basica SET discount_basic = ?, value_basic = ?, limit_discount_basic = ?, falta_discount_basic = ?, afastamento_disc_porp = ?, ferias_disc = ?, get_basic_with_one_day = ?, magnetic_card = ?, misses_day_prop_disc = ?, afast_prop_disc = ?, atestado_disc = ?, atestado_prop_disc = ?, ferias_prop_disc = ?, basic_nature = ? WHERE id = ?;";
+            var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
+
+            prepareStatement.setInt(1, dados.getDiscount_basic());
+            prepareStatement.setInt(2, dados.getValue_basic());
+            prepareStatement.setInt(3, dados.getLimit_disc_basic());
+            prepareStatement.setBoolean(4, dados.isFalta_disc_basic());
+            prepareStatement.setBoolean(5, dados.isAfast_disc_porp());
+            prepareStatement.setBoolean(6, dados.isFerias_disc());
+            prepareStatement.setBoolean(7, dados.isGet_basic_with_one_day());
+            prepareStatement.setBoolean(8, dados.isMagnetic_card());
+            prepareStatement.setBoolean(9, dados.isMisses_day_prop_disc());
+            prepareStatement.setBoolean(10, dados.isAfast_disc_prop());
+            prepareStatement.setBoolean(11, dados.isAtest_disc());
+            prepareStatement.setBoolean(12, dados.isAtestado_prop_disc());
+            prepareStatement.setBoolean(13, dados.isFerias_prop_disc());
+            prepareStatement.setBoolean(14, dados.isBasic_nature());
+            prepareStatement.setInt(15, dados.getIdCB());
+
+            return prepareStatement.executeQuery();
+        } catch (SQLException e) {
+            throw new SindicateError(e.getMessage());
+        }
+    }
+
+    public ResultSet changeSindVale(SindicateEntity dados) throws SindicateError{
+        try {
+            var query = "UPDATE sindicate_vale SET falta_disc_va_vr = ?, falta_disc_vr = ?, atestado_disc_va_vr = ?, atestado_disc_vt = ?, vacation_disc_va_vr = ?, vacation_disc_vt = ?, afast_disc_vt_inss = ?, afast_disc_va_vr_inss = ?, vt_disc_min_salary = ?, value_alim_day = ?, limit_desc_vale_folha = ?, limit_desc_va_vr_perc = ?, limit_desc_va_vr_folha = ?, desc_vt_perc = ? WHERE id = ?;";
+            var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
+
+            prepareStatement.setBoolean(1, dados.isFalta_disc_va_vr());
+            prepareStatement.setBoolean(2, dados.isFalta_disc_vr());
+            prepareStatement.setBoolean(3, dados.isAtestado_disc_va_vr());
+            prepareStatement.setBoolean(4, dados.isAtestado_disc_vt());
+            prepareStatement.setBoolean(5, dados.isVacation_disc_va_vr());
+            prepareStatement.setBoolean(6, dados.isVacation_disc_vt());
+            prepareStatement.setBoolean(7, dados.isAfast_disc_vt_inss());
+            prepareStatement.setBoolean(8, dados.isAfast_disc_va_vr_inss());
+            prepareStatement.setBoolean(9, dados.isVt_disc_min_salary());
+            prepareStatement.setInt(10, dados.getValue_alim_day());
+            prepareStatement.setInt(11, dados.getLimit_desc_vale_folha());
+            prepareStatement.setInt(12, dados.getLimit_desc_va_vr_perc());
+            prepareStatement.setInt(13, dados.getLimit_desc_va_vr_folha());
+            prepareStatement.setInt(14, dados.getDesc_vt_perc());
+            prepareStatement.setInt(15, dados.getIdVale());
+
+            return prepareStatement.executeQuery();
+        } catch (SQLException e) {
+            throw new SindicateError(e.getMessage());
+        }
+    }
+
+    public ResultSet changeSindBF(SindicateEntity dados) throws SindicateError{
+        try {
+            var query = "UPDATE sindicate_breakfest SET atestado_disc = ?, atestado_disc_prop = ?, falta_disc = ?, falta_disc_prop = ?, vacation_disc = ?, vacation_disc_prop = ?, afast_disc = ?, afast_disc_prop = ?, breakfest_nature = ?, limit_desc_percent = ?, value_day = ?, value_month = ?, limit_desc = ? WHERE id = ?;";
+            var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
+
+            prepareStatement.setBoolean(1, dados.isAtest_disc());
+            prepareStatement.setBoolean(2, dados.isAtest_disc());
+            prepareStatement.setBoolean(3, dados.isAtest_disc_prop());
+            prepareStatement.setBoolean(4, dados.isFalta_disc());
+            prepareStatement.setBoolean(5, dados.isFalta_disc_prop());
+            prepareStatement.setBoolean(6, dados.isVacation_disc());
+            prepareStatement.setBoolean(7, dados.isVacation_disc_prop());
+            prepareStatement.setBoolean(8, dados.isAfast_disc());
+            prepareStatement.setBoolean(9, dados.isAfast_disc_prop());
+            prepareStatement.setInt(10, dados.getLimit_desc_percent());
+            prepareStatement.setInt(11, dados.getValue_day());
+            prepareStatement.setInt(12, dados.getValue_month());
+            prepareStatement.setInt(13, dados.getLimit_desc());
+            prepareStatement.setInt(14, dados.getIdBreakfest());
+
+            return prepareStatement.executeQuery();
+        } catch (SQLException e) {
+            throw new SindicateError(e.getMessage());
+        }
+    }
+
+    public ResultSet changeSindAuth(SindicateEntity dados) throws SindicateError{
+        try {
+            var query = "UPDATE sindicate_authorizations SET normal_hour = ?, salary_advance = ?, bank_hours = ?, shift_work = ?, sind_pays_beneith_emplo = ?, mobile_point_applies_approval = ? WHERE id = ?;";
+            var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
+
+            prepareStatement.setBoolean(1, dados.isNormal_hour());
+            prepareStatement.setBoolean(2, dados.isSalary_advance());
+            prepareStatement.setBoolean(3, dados.isBank_hours());
+            prepareStatement.setBoolean(4, dados.isShift_work());
+            prepareStatement.setBoolean(5, dados.isSind_pays_beneith_emplo());
+            prepareStatement.setBoolean(6, dados.isMobile_point_app_approval());
+            prepareStatement.setInt(7, dados.getIdAutho());
+            
+            return prepareStatement.executeQuery();
+        } catch (SQLException e) {
+            throw new SindicateError(e.getMessage());
+        }
+    }
+
+    public ResultSet changeSindValues(SindicateEntity dados) throws SindicateError{
+        try {
+            var query = "UPDATE sindicate_values SET attendance = ?, base_salary = ?, health_insurance = ?, christmas_bonus = ?, associative_contribution = ?, childcare_assistance = ?, education_aid = ?, unhealthness = ?, dangerousness = ?, nightime_supplement = ? WHERE id = ?;";
+            var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
+
+            prepareStatement.setInt(1, dados.getAttendance());
+            prepareStatement.setInt(2, dados.getBase_salary());
+            prepareStatement.setInt(3, dados.getHealth_insurance());
+            prepareStatement.setInt(4, dados.getChristmas_bonus());
+            prepareStatement.setInt(5, dados.getAssociative_contribution());
+            prepareStatement.setInt(6, dados.getChildcare_assistance());
+            prepareStatement.setInt(7, dados.getEducation_aid());
+            prepareStatement.setInt(8, dados.getUnhealthness());
+            prepareStatement.setInt(9, dados.getDangerousness());
+            prepareStatement.setInt(10, dados.getNightime_supplement());
+            prepareStatement.setInt(11, dados.getIdValues());
+
+            return prepareStatement.executeQuery();
+        } catch (SQLException e) {
+            throw new SindicateError(e.getMessage());
+        }
+    }
+
+    public ResultSet changeSindPerc(SindicateEntity dados) throws SindicateError{
+        try {
+            var query = "UPDATE sindicate_percents SET extra_hour_week = ?, extra_hour_saturday = ?, extra_hour_sunday_holidays = ?, sindicate_contribuition = ?, seconci = ?, salary_advance = ?, incentive_qualify = ?, complem_retirement = ?, night_time = ? WHERE id = ?;";
+            var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
+
+            prepareStatement.setInt(1, dados.getExtra_hour_week());
+            prepareStatement.setInt(2, dados.getExtra_hour_saturday());
+            prepareStatement.setInt(3, dados.getExtra_hour_sunday_holidays());
+            prepareStatement.setInt(4, dados.getSindicate_contr());
+            prepareStatement.setInt(5, dados.getSeconci());
+            prepareStatement.setInt(6, dados.getSalary_advance_percents());
+            prepareStatement.setInt(7, dados.getIncentive_qualify());
+            prepareStatement.setInt(8, dados.getComplem_retirement());
+            prepareStatement.setInt(9, dados.getNight_time());
+            prepareStatement.setInt(10, dados.getIdPercents());
+
+            return prepareStatement.executeQuery();
+        } catch (SQLException e) {
+            throw new SindicateError(e.getMessage());
+        }
+    }
+
 }
