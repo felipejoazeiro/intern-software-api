@@ -8,7 +8,7 @@ import br.com.tekno.features.employees.domain.errors.EmployeeErrors;
 import br.com.tekno.services.connection.PostgresConnection;
 
 public class EmployeeDatasource {
-    public ResultSet newEmployee(EmployeeEntity dados) throws EmployeeErrors {
+    public Boolean newEmployee(EmployeeEntity dados) throws EmployeeErrors {
 
         try {
             int contactId = newEmployeeContact(dados);
@@ -17,7 +17,7 @@ public class EmployeeDatasource {
             int accessId = newEmployeeAccess(dados);
 
             if (contactId != 0 && documentId != 0 && ticketId != 0 && accessId != 0) {
-                var query = "INSERT INTO employee(registration, name_employee, email, entry_date, contract_date, photo, fk_documents, fk_employee_contact, fk_ticket, fk_access, fk_cargo) values(?,?,?,?,?,?,?,?,?,?,?);";
+                var query = "INSERT INTO employee(registration, name_employee, email, entry_data, contract_data, photo, fk_documents, fk_employee_contact, fk_ticket, fk_access, fk_cargo, active_employee) values(?,?,?,?,?,?,?,?,?,?,?, true);";
                 var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
                 prepareStatement.setString(1, dados.getRegistration());
                 prepareStatement.setString(2, dados.getName_employee());
@@ -31,7 +31,9 @@ public class EmployeeDatasource {
                 prepareStatement.setInt(10, accessId);
                 prepareStatement.setInt(11, dados.getFk_cargo());
 
-                return prepareStatement.executeQuery();
+                prepareStatement.executeQuery();
+
+                return true;
             }
             throw new EmployeeErrors("Erro ao inserir algum valor");
         } catch (SQLException e) {
@@ -42,7 +44,7 @@ public class EmployeeDatasource {
 
     public int newEmployeeContact(EmployeeEntity dados) throws EmployeeErrors {
         try {
-            var queryInsertContact = "INSERT INTO employee_contact(phone, address, district, city, states, uf, cep) values(?,?,?,?,?,?,?);";
+            var queryInsertContact = "INSERT INTO employee_contact(phone, adress, district, city, states, uf, cep) values(?,?,?,?,?,?,?);";
             var prepareStatmentInsertContact = PostgresConnection.getConnection().prepareStatement(queryInsertContact);
             prepareStatmentInsertContact.setInt(1, dados.getPhone());
             prepareStatmentInsertContact.setString(2, dados.getAddress());
@@ -53,7 +55,7 @@ public class EmployeeDatasource {
             prepareStatmentInsertContact.setInt(7, dados.getCep());
             prepareStatmentInsertContact.executeUpdate();
 
-            var querySelectId = "SELECT id FROM employee_contact ec WHERE ec.phone = ? AND ec.address = ? AND ec.district = ? AND ec.city = ? AND ec.states = ? AND ec.uf = ? AND ec.cep = ?; ";
+            var querySelectId = "SELECT id FROM employee_contact ec WHERE ec.phone = ? AND ec.adress = ? AND ec.district = ? AND ec.city = ? AND ec.states = ? AND ec.uf = ? AND ec.cep = ?; ";
             var prepareStatementSelectId = PostgresConnection.getConnection().prepareStatement(querySelectId);
             prepareStatementSelectId.setInt(1, dados.getPhone());
             prepareStatementSelectId.setString(2, dados.getAddress());
@@ -89,7 +91,7 @@ public class EmployeeDatasource {
             prepareStatementInsertDocuments.setInt(8, dados.getCpf());
             prepareStatementInsertDocuments.executeUpdate();
 
-            var querySelectDocumentId = "";
+            var querySelectDocumentId = "SELECT id FROM documents d WHERE d.nro_title =? AND d.electoral_zone = ? AND d.electoral_section = ? AND nro_rg = ? AND state_rg = ? AND nro_work_card = ? AND series_work_card = ? AND cpf = ?;";
             var prepareStatementSelectDocumentId = PostgresConnection.getConnection()
                     .prepareStatement(querySelectDocumentId);
             prepareStatementSelectDocumentId.setString(1, dados.getNro_title());
@@ -141,8 +143,8 @@ public class EmployeeDatasource {
     public int newEmployeeAccess(EmployeeEntity dados) throws EmployeeErrors {
         try {
             var listName = dados.getName_employee().split(" ");
-            var login = "" + listName[0] + "_" + listName[listName.length - 1] + "";
-            var password = dados.getPassword();
+            var login = ("" + listName[0] + "_" + listName[listName.length - 1] + "").toLowerCase();
+            var password = dados.getRegistration();
 
             if (!checkLogin(login)) {
                 var query = "INSERT INTO access(login, password) values(?,?)";

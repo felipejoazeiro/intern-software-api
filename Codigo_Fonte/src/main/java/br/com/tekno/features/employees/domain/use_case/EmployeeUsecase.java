@@ -8,7 +8,7 @@ import br.com.tekno.features.employees.domain.errors.EmployeeErrorMissingData;
 import br.com.tekno.features.employees.domain.errors.EmployeeErrors;
 
 public class EmployeeUsecase {
-    public ResultSet newEmployee(EmployeeEntity dados) throws EmployeeErrors{
+    public boolean newEmployee(EmployeeEntity dados) throws EmployeeErrors{
 
         if(dados.getRegistration() == ""){
             throw new EmployeeErrorMissingData("Matrícula não enviada");
