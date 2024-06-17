@@ -15,7 +15,7 @@ public class EmployeeController {
     
     @Route(path = "newEmployee", methods=Route.HttpMethod.POST)
     @Produces(MediaType.APPLICATION_JSON)
-    public ResultSet newEmployee(@Body EmployeeEntity dados) throws EmployeeErrors{
+    public Boolean newEmployee(@Body EmployeeEntity dados) throws EmployeeErrors{
         return new EmployeeUsecase().newEmployee(dados);
     }
 
