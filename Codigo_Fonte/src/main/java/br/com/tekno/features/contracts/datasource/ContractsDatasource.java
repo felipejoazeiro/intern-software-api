@@ -3,13 +3,19 @@ package br.com.tekno.features.contracts.datasource;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 
+import br.com.tekno.features.contracts.domain.entity.ContractDatesEntity;
+import br.com.tekno.features.contracts.domain.entity.ContractDiscountEntity;
 import br.com.tekno.features.contracts.domain.entity.ContractEntity;
+import br.com.tekno.features.contracts.domain.entity.ContractInfosEntity;
+import br.com.tekno.features.contracts.domain.entity.ContractRhEntity;
+import br.com.tekno.features.contracts.domain.entity.ContractValuesEntity;
+import br.com.tekno.features.contracts.domain.entity.CreateContractEntity;
 import br.com.tekno.features.contracts.domain.errors.ContractErrors;
 import br.com.tekno.services.connection.PostgresConnection;
 
 public class ContractsDatasource {
 
-    public ResultSet newContract(ContractEntity dados) throws ContractErrors {
+    public ResultSet newContract(CreateContractEntity dados) throws ContractErrors {
         try {
             int infoId = newContractInfos(dados);
             int contactId = newContractContacts(dados);
@@ -43,7 +49,7 @@ public class ContractsDatasource {
         }
     }
 
-    public int newContractInfos(ContractEntity dados) throws ContractErrors {
+    public int newContractInfos(CreateContractEntity dados) throws ContractErrors {
         try {
             var query = "INSERT INTO contract_infos(construction, cap, process, info_pmoc, max_employee) VALUES(?,?,?,?,?);";
             var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
@@ -78,7 +84,7 @@ public class ContractsDatasource {
         }
     }
 
-    public int newContractContacts(ContractEntity dados) throws ContractErrors {
+    public int newContractContacts(CreateContractEntity dados) throws ContractErrors {
         try {
             var queryInsert = "INSERT INTO contract_contact(address, nro, complement, phone, state, city, cep, email, contact) VALUES (?,?,?,?,?,?,?,?,?);";
             var prepareStatementNewContact = PostgresConnection.getConnection().prepareStatement(queryInsert);
@@ -120,7 +126,7 @@ public class ContractsDatasource {
         }
     }
 
-    public int newContractValues(ContractEntity dados) throws ContractErrors {
+    public int newContractValues(CreateContractEntity dados) throws ContractErrors {
         try {
             var queryInsert = "INSERT INTO contract_values(value_identifier ,acronym, bdi_service, bdi_material, bdi_labor, entry_table, send_email) VALUES (?,?,?,?,?,?);";
             var prepareStatementInsertValues = PostgresConnection.getConnection().prepareStatement(queryInsert);
@@ -152,7 +158,7 @@ public class ContractsDatasource {
         }
     }
 
-    public int newContractDates(ContractEntity dados) throws ContractErrors {
+    public int newContractDates(CreateContractEntity dados) throws ContractErrors {
         try {
             var queryInsert = "INSERT INTO contract_dates(date_identifier ,date_initial, date_limit, date_guarantee, date_proposal, date_budget, date_tables) VALUES (?,?,?,?,?,?);";
             var prepareStatementInsertDates = PostgresConnection.getConnection().prepareStatement(queryInsert);
@@ -182,7 +188,7 @@ public class ContractsDatasource {
         }
     }
 
-    public int newContractDiscount(ContractEntity dados) throws ContractErrors {
+    public int newContractDiscount(CreateContractEntity dados) throws ContractErrors {
         try {
             var queryInsert = "INSERT INTO contract_discount(disc_identifier, disc_service, disc_transport, disc_transp_employee, disc_labor, disc_material, disc_field) VALUES (?,?,?,?,?,?,?)";
             var prepareStatementInsertDiscount = PostgresConnection.getConnection().prepareStatement(queryInsert);
@@ -214,7 +220,7 @@ public class ContractsDatasource {
         }
     }
 
-    public int newContractRh(ContractEntity dados) throws ContractErrors {
+    public int newContractRh(CreateContractEntity dados) throws ContractErrors {
         try {
             var query = "";
             var prepareStatementInsert = PostgresConnection.getConnection().prepareStatement(query);
@@ -259,7 +265,7 @@ public class ContractsDatasource {
             prepareStatement.setString(3, dados.getAcronymEmployee());
             prepareStatement.setBoolean(4, dados.isResearch());
             prepareStatement.setBoolean(5, dados.isUses_cpf());
-            prepareStatement.setInt(6, dados.getIdContract());
+            prepareStatement.setInt(6, dados.getId());
 
             return prepareStatement.executeQuery();
 
@@ -268,7 +274,7 @@ public class ContractsDatasource {
         }
     }
 
-    public ResultSet alterRhContract(ContractEntity dados) throws ContractErrors {
+    public ResultSet alterRhContract(ContractRhEntity dados) throws ContractErrors {
         try {
             var query = "UPDATE contract_rh SET hour_limit = ?, minutes_limit = ?, days_first_exp = ?, days_second_exp = ?, data_init = ?, pay_extra_hour = ?, bank_hours_compens = ?, manual_stitch = ?, pays_breakfast = ? WHERE id = ?;";
             var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
@@ -282,7 +288,7 @@ public class ContractsDatasource {
             prepareStatement.setBoolean(7, dados.isBank_hours_compens());
             prepareStatement.setBoolean(8, dados.isManual_stitch());
             prepareStatement.setBoolean(9, dados.isPays_breakfast());
-            prepareStatement.setInt(10, dados.getIdRh());
+            prepareStatement.setInt(10, dados.getId());
 
             return prepareStatement.executeQuery();
 
@@ -291,17 +297,17 @@ public class ContractsDatasource {
         }
     }
 
-    public ResultSet alterContractDiscount(ContractEntity dados) throws ContractErrors {
+    public ResultSet alterContractDiscount(ContractDiscountEntity dados) throws ContractErrors {
         try {
             var query = "UPDATE contract_discount SET disc_service = ?, disc_transport = ? , disc_transp_employee = ?, disc_labor = ?, disc_material = ?, disc_field = ?;";
             var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
 
-            prepareStatement.setInt(1, dados.getDisc_identifier());
-            prepareStatement.setInt(2, dados.getDisc_service());
-            prepareStatement.setInt(3, dados.getDisc_transport());
-            prepareStatement.setInt(4, dados.getDisc_tranp_employee());
-            prepareStatement.setInt(5, dados.getDisc_labor());
-            prepareStatement.setInt(6, dados.getDisc_material());
+            prepareStatement.setInt(1, dados.getDisc_service());
+            prepareStatement.setInt(2, dados.getDisc_transport());
+            prepareStatement.setInt(3, dados.getDisc_tranp_employee());
+            prepareStatement.setInt(4, dados.getDisc_labor());
+            prepareStatement.setInt(5, dados.getDisc_material());
+            prepareStatement.setInt(6, dados.getIdDiscount());
 
             return prepareStatement.executeQuery();
         } catch (SQLException e) {
@@ -309,9 +315,9 @@ public class ContractsDatasource {
         }
     }
 
-    public ResultSet alterContractDates(ContractEntity dados) throws ContractErrors {
+    public ResultSet alterContractDates(ContractDatesEntity dados) throws ContractErrors {
         try {
-            var query = "UPDATE contract_dates SET date_initial = ?, date_limit = ?, date_guarantee = ?, date_proposal = ?, date_budget = ?, date_tables = ?;";
+            var query = "UPDATE contract_dates SET date_initial = ?, date_limit = ?, date_guarantee = ?, date_proposal = ?, date_budget = ?, date_tables = ? WHERE id = ?;";
             var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
 
             prepareStatement.setDate(1, dados.getDate_initial());
@@ -320,6 +326,7 @@ public class ContractsDatasource {
             prepareStatement.setDate(4, dados.getDate_proposal());
             prepareStatement.setDate(5, dados.getDate_budget());
             prepareStatement.setDate(6, dados.getDate_tables());
+            prepareStatement.setInt(7, dados.getId());
 
             return prepareStatement.executeQuery();
 
@@ -328,7 +335,7 @@ public class ContractsDatasource {
         }
     }
 
-    public ResultSet alterContractValues(ContractEntity dados) throws ContractErrors {
+    public ResultSet alterContractValues(ContractValuesEntity dados) throws ContractErrors {
         try {
             var query = "UPDATE contract_values SET acronym = ?, bdi_service = ?, bdi_material = ?, bdi_labor = ?, entry_table = ?, send_email = ? WHERE id = ?;";
             var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
@@ -339,7 +346,7 @@ public class ContractsDatasource {
             prepareStatement.setInt(4, dados.getBdi_labor());
             prepareStatement.setBoolean(5, dados.isEntry_table());
             prepareStatement.setBoolean(6, dados.isSend_email());
-            prepareStatement.setInt(7, dados.getIdValues());
+            prepareStatement.setInt(7, dados.getId());
 
             return prepareStatement.executeQuery();
         } catch (Exception e) {
@@ -347,7 +354,7 @@ public class ContractsDatasource {
         }
     }
 
-    public ResultSet alterContractContacts(ContractEntity dados) throws ContractErrors {
+    public ResultSet alterContractContacts(CreateContractEntity dados) throws ContractErrors {
         try {
             var query = "UPDATE contract_contact SET address = ?, nro = ?, complement = ?, phone = ?, state = ?, city = ?, cep = ?, email = ?, contact = ? WHERE id = ?;";
             var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
@@ -370,7 +377,7 @@ public class ContractsDatasource {
         }
     }
 
-    public ResultSet alterContractInfos(ContractEntity dados) throws ContractErrors {
+    public ResultSet alterContractInfos(ContractInfosEntity dados) throws ContractErrors {
         try {
             var query = "UPDATE contract_infos SET construction = ?, cap = ?, process = ?, info_pmoc = ?, max_employee = ? WHERE id = ?;";
             var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
@@ -380,7 +387,7 @@ public class ContractsDatasource {
             prepareStatement.setString(3, dados.getProcess());
             prepareStatement.setString(4, dados.getInfo_pmoc());
             prepareStatement.setInt(5, dados.getMax_employee());
-            prepareStatement.setInt(6, dados.getIdInfos());
+            prepareStatement.setInt(6, dados.getId());
 
             return prepareStatement.executeQuery();
 
@@ -402,11 +409,11 @@ public class ContractsDatasource {
         }
     }
 
-    public ResultSet activeContract(int id) throws ContractErrors{
+    public ResultSet activeContract(int id) throws ContractErrors {
         try {
             var query = "";
             var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
-        
+
             prepareStatement.setInt(1, id);
 
             return prepareStatement.executeQuery();

@@ -5,7 +5,11 @@ import jakarta.ws.rs.core.MediaType;
 
 import java.sql.ResultSet;
 
+import br.com.tekno.features.employees.domain.entity.EmployeeContactEntity;
+import br.com.tekno.features.employees.domain.entity.EmployeeDocumentsEntity;
 import br.com.tekno.features.employees.domain.entity.EmployeeEntity;
+import br.com.tekno.features.employees.domain.entity.CreateEmployeeEntity;
+import br.com.tekno.features.employees.domain.entity.EmployeeTicketEntity;
 import br.com.tekno.features.employees.domain.errors.EmployeeErrors;
 import br.com.tekno.features.employees.domain.use_case.EmployeeUsecase;
 import io.quarkus.vertx.web.Body;
@@ -15,7 +19,7 @@ public class EmployeeController {
     
     @Route(path = "newEmployee", methods=Route.HttpMethod.POST)
     @Produces(MediaType.APPLICATION_JSON)
-    public Boolean newEmployee(@Body EmployeeEntity dados) throws EmployeeErrors{
+    public Boolean newEmployee(@Body CreateEmployeeEntity dados) throws EmployeeErrors{
         return new EmployeeUsecase().newEmployee(dados);
     }
 
@@ -27,25 +31,25 @@ public class EmployeeController {
 
     @Route(path = "editContact", methods=Route.HttpMethod.POST)
     @Produces(MediaType.APPLICATION_JSON)
-    public ResultSet editContact(@Body EmployeeEntity dados) throws EmployeeErrors{
+    public ResultSet editContact(@Body EmployeeContactEntity dados) throws EmployeeErrors{
         return new EmployeeUsecase().editContacts(dados);
     }
 
     @Route(path = "editDocuments", methods=Route.HttpMethod.POST)
     @Produces(MediaType.APPLICATION_JSON)
-    public ResultSet editDocuments(@Body EmployeeEntity dados) throws EmployeeErrors{
+    public ResultSet editDocuments(@Body EmployeeDocumentsEntity dados) throws EmployeeErrors{
         return new EmployeeUsecase().editDocuments(dados);
     }
 
     @Route(path = "editTicket", methods=Route.HttpMethod.POST)
     @Produces(MediaType.APPLICATION_JSON)
-    public ResultSet editTicket(@Body EmployeeEntity dados) throws EmployeeErrors{
+    public ResultSet editTicket(@Body EmployeeTicketEntity dados) throws EmployeeErrors{
         return new EmployeeUsecase().editTicket(dados);
     }
 
     @Route(path = "editAccess", methods=Route.HttpMethod.POST)
     @Produces(MediaType.APPLICATION_JSON)
-    public ResultSet editAccess(@Body EmployeeEntity dados) throws EmployeeErrors{
+    public ResultSet editAccess(@Body CreateEmployeeEntity dados) throws EmployeeErrors{
         return new EmployeeUsecase().editLogin(dados);
     }
 
@@ -57,7 +61,7 @@ public class EmployeeController {
 
     @Route(path = "activeEmployee", methods = Route.HttpMethod.POST)
     @Produces(MediaType.APPLICATION_JSON)
-    public ResultSet activeEmployee(@Body EmployeeEntity dados) throws EmployeeErrors{
+    public ResultSet activeEmployee(@Body CreateEmployeeEntity dados) throws EmployeeErrors{
         throw new EmployeeErrors("algo");
     }
 
