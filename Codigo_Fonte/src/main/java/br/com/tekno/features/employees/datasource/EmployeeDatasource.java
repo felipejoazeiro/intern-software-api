@@ -3,12 +3,16 @@ package br.com.tekno.features.employees.datasource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import br.com.tekno.features.employees.domain.entity.EmployeeContactEntity;
+import br.com.tekno.features.employees.domain.entity.EmployeeDocumentsEntity;
 import br.com.tekno.features.employees.domain.entity.EmployeeEntity;
+import br.com.tekno.features.employees.domain.entity.CreateEmployeeEntity;
+import br.com.tekno.features.employees.domain.entity.EmployeeTicketEntity;
 import br.com.tekno.features.employees.domain.errors.EmployeeErrors;
 import br.com.tekno.services.connection.PostgresConnection;
 
 public class EmployeeDatasource {
-    public Boolean newEmployee(EmployeeEntity dados) throws EmployeeErrors {
+    public Boolean newEmployee(CreateEmployeeEntity dados) throws EmployeeErrors {
 
         try {
             int contactId = newEmployeeContact(dados);
@@ -42,7 +46,7 @@ public class EmployeeDatasource {
 
     }
 
-    public int newEmployeeContact(EmployeeEntity dados) throws EmployeeErrors {
+    public int newEmployeeContact(CreateEmployeeEntity dados) throws EmployeeErrors {
         try {
             var queryInsertContact = "INSERT INTO employee_contact(phone, adress, district, city, states, uf, cep) values(?,?,?,?,?,?,?);";
             var prepareStatmentInsertContact = PostgresConnection.getConnection().prepareStatement(queryInsertContact);
@@ -76,7 +80,7 @@ public class EmployeeDatasource {
         }
     }
 
-    public int newEmployeeDocuments(EmployeeEntity dados) throws EmployeeErrors {
+    public int newEmployeeDocuments(CreateEmployeeEntity dados) throws EmployeeErrors {
         try {
             var queryInsertDocuments = "INSERT INTO documents(nro_title, electoral_zone, electoral_section, nro_rg, state_rg, nro_work_card, series_work_card, cpf) values(?,?,?,?,?,?,?,?);";
             var prepareStatementInsertDocuments = PostgresConnection.getConnection()
@@ -114,7 +118,7 @@ public class EmployeeDatasource {
         }
     }
 
-    public int newEmployeeTicket(EmployeeEntity dados) throws EmployeeErrors {
+    public int newEmployeeTicket(CreateEmployeeEntity dados) throws EmployeeErrors {
         try {
             var queryInsertTicket = "INSERT INTO ticket(identification, code_operator, code_line, card_number, qtt_daily_ticket, ticket_value, fk_ticket_type) values(?,?,?,?,?,?,?)";
             var prepareStatementInsertTicket = PostgresConnection.getConnection().prepareStatement(queryInsertTicket);
@@ -140,7 +144,7 @@ public class EmployeeDatasource {
         }
     }
 
-    public int newEmployeeAccess(EmployeeEntity dados) throws EmployeeErrors {
+    public int newEmployeeAccess(CreateEmployeeEntity dados) throws EmployeeErrors {
         try {
             var listName = dados.getName_employee().split(" ");
             var login = ("" + listName[0] + "_" + listName[listName.length - 1] + "").toLowerCase();
@@ -210,9 +214,9 @@ public class EmployeeDatasource {
         }
     }
 
-    public ResultSet editDocuments(EmployeeEntity dados) throws EmployeeErrors {
+    public ResultSet editDocuments(EmployeeDocumentsEntity dados) throws EmployeeErrors {
         try {
-            var query = "UPDATE documents SET nro_title = ?, electoral_zone = ?, electoral_section = ?, nro_rg = ?, state_rg = ?, nro_work_card = ?, series_work_card = ?, cpf = ?";
+            var query = "UPDATE documents SET nro_title = ?, electoral_zone = ?, electoral_section = ?, nro_rg = ?, state_rg = ?, nro_work_card = ?, series_work_card = ?, cpf = ? WHERE id = ?";
             var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
 
             prepareStatement.setString(1, dados.getNro_title());
@@ -223,6 +227,7 @@ public class EmployeeDatasource {
             prepareStatement.setInt(6, dados.getNro_work_card());
             prepareStatement.setString(7, dados.getSeries_work_card());
             prepareStatement.setInt(8, dados.getCpf());
+            prepareStatement.setInt(9, dados.getId());
 
             return prepareStatement.executeQuery();
         } catch (SQLException e) {
@@ -230,7 +235,7 @@ public class EmployeeDatasource {
         }
     }
 
-    public ResultSet editContacts(EmployeeEntity dados) throws EmployeeErrors {
+    public ResultSet editContacts(EmployeeContactEntity dados) throws EmployeeErrors {
         try {
             var query = "UPDATE employee_contact SET phone = ?, address = ?, district = ?, city = ?, states = ?, uf = ?, cep = ? WHERE id = ?";
             var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
@@ -242,7 +247,7 @@ public class EmployeeDatasource {
             prepareStatement.setString(5, dados.getStates());
             prepareStatement.setString(6, dados.getUf());
             prepareStatement.setInt(7, dados.getCep());
-            prepareStatement.setInt(8, dados.getId_contact());
+            prepareStatement.setInt(8, dados.getId());
 
             return prepareStatement.executeQuery();
 
@@ -251,7 +256,7 @@ public class EmployeeDatasource {
         }
     }
 
-    public ResultSet editTicket(EmployeeEntity dados) throws EmployeeErrors {
+    public ResultSet editTicket(EmployeeTicketEntity dados) throws EmployeeErrors {
         try {
             var query = "UPDATE ticket SET identification = ?, code_operator = ?, code_line = ?, card_number = ?, qtt_daily_ticket = ?, ticket_value = ?, fk_ticket_type = ? WHERE id = ?;";
             var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);
@@ -263,7 +268,7 @@ public class EmployeeDatasource {
             prepareStatement.setInt(5, dados.getQtt_daily_ticker());
             prepareStatement.setInt(6, dados.getTicket_value());
             prepareStatement.setInt(7, dados.getFk_ticket_type());
-            prepareStatement.setInt(8, dados.getId_ticket());
+            prepareStatement.setInt(8, dados.getId());
 
             return prepareStatement.executeQuery();
         } catch (SQLException e) {
@@ -271,7 +276,7 @@ public class EmployeeDatasource {
         }
     }
 
-    public ResultSet editAccess(EmployeeEntity dados) throws EmployeeErrors {
+    public ResultSet editAccess(CreateEmployeeEntity dados) throws EmployeeErrors {
         try {
             var query = "UPDATE access SET login = ?, password = ? WHERE id = ?;";
             var prepareStatement = PostgresConnection.getConnection().prepareStatement(query);

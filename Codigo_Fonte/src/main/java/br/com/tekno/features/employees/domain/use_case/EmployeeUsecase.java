@@ -3,12 +3,16 @@ package br.com.tekno.features.employees.domain.use_case;
 import java.sql.ResultSet;
 
 import br.com.tekno.features.employees.datasource.EmployeeDatasource;
+import br.com.tekno.features.employees.domain.entity.EmployeeContactEntity;
+import br.com.tekno.features.employees.domain.entity.EmployeeDocumentsEntity;
 import br.com.tekno.features.employees.domain.entity.EmployeeEntity;
+import br.com.tekno.features.employees.domain.entity.CreateEmployeeEntity;
+import br.com.tekno.features.employees.domain.entity.EmployeeTicketEntity;
 import br.com.tekno.features.employees.domain.errors.EmployeeErrorMissingData;
 import br.com.tekno.features.employees.domain.errors.EmployeeErrors;
 
 public class EmployeeUsecase {
-    public boolean newEmployee(EmployeeEntity dados) throws EmployeeErrors{
+    public boolean newEmployee(CreateEmployeeEntity dados) throws EmployeeErrors{
 
         if(dados.getRegistration() == ""){
             throw new EmployeeErrorMissingData("Matrícula não enviada");
@@ -25,30 +29,30 @@ public class EmployeeUsecase {
         return new EmployeeDatasource().editEmployee(dados);
     }
 
-    public ResultSet editDocuments(EmployeeEntity dados) throws EmployeeErrors {
-        if(dados.getId_documents() <= 0 || dados.getNro_title() == ""){
+    public ResultSet editDocuments(EmployeeDocumentsEntity dados) throws EmployeeErrors {
+        if(dados.getId() <= 0 || dados.getNro_title() == ""){
             throw new EmployeeErrorMissingData("Dados faltantes");
         }
         
         return new EmployeeDatasource().editDocuments(dados);
     }
 
-    public ResultSet editContacts(EmployeeEntity dados) throws EmployeeErrors{
-        if(dados.getId_contact() <= 0){
+    public ResultSet editContacts(EmployeeContactEntity dados) throws EmployeeErrors{
+        if(dados.getId() <= 0){
             throw new EmployeeErrorMissingData("Dados faltantes.");       
         }
 
         return new EmployeeDatasource().editContacts(dados);
     }
 
-    public ResultSet editTicket(EmployeeEntity dados) throws EmployeeErrors{
-        if(dados.getId_ticket() <= 0){
+    public ResultSet editTicket(EmployeeTicketEntity dados) throws EmployeeErrors{
+        if(dados.getId() <= 0){
             throw new EmployeeErrorMissingData("Dados faltantes");
         }
         return new EmployeeDatasource().editTicket(dados);
     }
 
-    public ResultSet editLogin(EmployeeEntity dados) throws EmployeeErrors{
+    public ResultSet editLogin(CreateEmployeeEntity dados) throws EmployeeErrors{
         if(dados.getId_access() <= 0 || dados.getLogin() == "" || dados.getPassword() == ""){
             throw new EmployeeErrorMissingData("Dados faltantes");
         }
