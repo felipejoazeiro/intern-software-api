@@ -59,8 +59,8 @@ public class CreateContractEntity {
     private int disc_field;
     private int idRh;
     private int rh_identifier;
-    private Date hour_limit;
-    private Date minutes_limit;
+    private int hour_limit;
+    private int minutes_limit;
     private int days_first_exp;
     private int days_second_exp;
     private Date data_init;
@@ -69,230 +69,58 @@ public class CreateContractEntity {
     private boolean manual_stitch;
     private boolean pays_breakfast;
 
-    public CreateContractEntity(int idContract, String code_contract, String name_contract, String acronymEmployee,
-            boolean research, boolean active, boolean uses_cpf, int fk_contract_contact, int fk_contract_info,
-            int fk_contract_dates, int fk_contract_values, int fk_contract_discount, int fk_contract_rh, int idInfos,
-            String construction, String cap, String process, String info_pmoc, int max_employee, int idContact,
-            String address, int nro, String complement, int phone, String state, String city, int cep, String email,
-            String contact, int idValues, int value_identifier, String acronymValues, int bdi_service, int bdi_material,
-            int bdi_labor, boolean entry_table, boolean send_email, int idDates, int date_identifier, Date date_initial,
-            Date date_limit, Date date_guarantee, Date date_proposal, Date date_budget, Date date_tables,
-            int idDiscount, int disc_identifier, int disc_service, int disc_transport, int disc_tranp_employee,
-            int disc_labor, int disc_material, int disc_field, int idRh, int rh_identifier, Date hour_limit,
-            Date minutes_limit, int days_first_exp, int days_second_exp, Date data_init, boolean pay_extra_hour,
-            boolean bank_hours_compens, boolean manual_stitch, boolean pays_breakfast) {
-        this.idContract = idContract;
-        this.code_contract = code_contract;
-        this.name_contract = name_contract;
-        this.acronymEmployee = acronymEmployee;
-        this.research = research;
-        this.active = active;
-        this.uses_cpf = uses_cpf;
-        this.fk_contract_contact = fk_contract_contact;
-        this.fk_contract_info = fk_contract_info;
-        this.fk_contract_dates = fk_contract_dates;
-        this.fk_contract_values = fk_contract_values;
-        this.fk_contract_discount = fk_contract_discount;
-        this.fk_contract_rh = fk_contract_rh;
-        this.idInfos = idInfos;
-        this.construction = construction;
-        this.cap = cap;
-        this.process = process;
-        this.info_pmoc = info_pmoc;
-        this.max_employee = max_employee;
-        this.idContact = idContact;
-        this.address = address;
-        this.nro = nro;
-        this.complement = complement;
-        this.phone = phone;
-        this.state = state;
-        this.city = city;
-        this.cep = cep;
-        this.email = email;
-        this.contact = contact;
-        this.idValues = idValues;
-        this.value_identifier = value_identifier;
-        this.acronymValues = acronymValues;
-        this.bdi_service = bdi_service;
-        this.bdi_material = bdi_material;
-        this.bdi_labor = bdi_labor;
-        this.entry_table = entry_table;
-        this.send_email = send_email;
-        this.idDates = idDates;
-        this.date_identifier = date_identifier;
-        this.date_initial = date_initial;
-        this.date_limit = date_limit;
-        this.date_guarantee = date_guarantee;
-        this.date_proposal = date_proposal;
-        this.date_budget = date_budget;
-        this.date_tables = date_tables;
-        this.idDiscount = idDiscount;
-        this.disc_identifier = disc_identifier;
-        this.disc_service = disc_service;
-        this.disc_transport = disc_transport;
-        this.disc_tranp_employee = disc_tranp_employee;
-        this.disc_labor = disc_labor;
-        this.disc_material = disc_material;
-        this.disc_field = disc_field;
-        this.idRh = idRh;
-        this.rh_identifier = rh_identifier;
-        this.hour_limit = hour_limit;
-        this.minutes_limit = minutes_limit;
-        this.days_first_exp = days_first_exp;
-        this.days_second_exp = days_second_exp;
-        this.data_init = data_init;
-        this.pay_extra_hour = pay_extra_hour;
-        this.bank_hours_compens = bank_hours_compens;
-        this.manual_stitch = manual_stitch;
-        this.pays_breakfast = pays_breakfast;
-    }
-
-    //Create new Contract
+    // Create new Contract
     public CreateContractEntity(String code_contract, String name_contract, String acronymEmployee, boolean research,
             boolean active, boolean uses_cpf, String construction, String cap, String process, String info_pmoc,
-            int max_employee, int idContact, String address, int nro, String complement, int phone, String state,
-            String city, int cep, String email, String contact, int value_identifier, String acronymValues,
-            int bdi_service, int bdi_material, int bdi_labor, boolean entry_table, boolean send_email,
-            int date_identifier, Date date_initial, Date date_limit, Date date_guarantee, Date date_proposal,
-            Date date_budget, Date date_tables, int disc_identifier, int disc_service, int disc_transport,
-            int disc_tranp_employee, int disc_labor, int disc_material, int disc_field, int rh_identifier,
-            Date hour_limit, Date minutes_limit, int days_first_exp, int days_second_exp, Date data_init,
-            boolean pay_extra_hour, boolean bank_hours_compens, boolean manual_stitch, boolean pays_breakfast) {
-        this.code_contract = code_contract;
-        this.name_contract = name_contract;
-        this.acronymEmployee = acronymEmployee;
-        this.research = research;
-        this.active = active;
-        this.uses_cpf = uses_cpf;
-        this.construction = construction;
-        this.cap = cap;
-        this.process = process;
-        this.info_pmoc = info_pmoc;
-        this.max_employee = max_employee;
-        this.idContact = idContact;
-        this.address = address;
-        this.nro = nro;
-        this.complement = complement;
-        this.phone = phone;
-        this.state = state;
-        this.city = city;
-        this.cep = cep;
-        this.email = email;
-        this.contact = contact;
-        this.value_identifier = value_identifier;
-        this.acronymValues = acronymValues;
-        this.bdi_service = bdi_service;
-        this.bdi_material = bdi_material;
-        this.bdi_labor = bdi_labor;
-        this.entry_table = entry_table;
-        this.send_email = send_email;
-        this.date_identifier = date_identifier;
-        this.date_initial = date_initial;
-        this.date_limit = date_limit;
-        this.date_guarantee = date_guarantee;
-        this.date_proposal = date_proposal;
-        this.date_budget = date_budget;
-        this.date_tables = date_tables;
-        this.disc_identifier = disc_identifier;
-        this.disc_service = disc_service;
-        this.disc_transport = disc_transport;
-        this.disc_tranp_employee = disc_tranp_employee;
-        this.disc_labor = disc_labor;
-        this.disc_material = disc_material;
-        this.disc_field = disc_field;
-        this.rh_identifier = rh_identifier;
-        this.hour_limit = hour_limit;
-        this.minutes_limit = minutes_limit;
-        this.days_first_exp = days_first_exp;
-        this.days_second_exp = days_second_exp;
-        this.data_init = data_init;
-        this.pay_extra_hour = pay_extra_hour;
-        this.bank_hours_compens = bank_hours_compens;
-        this.manual_stitch = manual_stitch;
-        this.pays_breakfast = pays_breakfast;
-    }
-
-    public CreateContractEntity(int idContract, String code_contract, String name_contract, String acronymEmployee,
-            boolean research, boolean active, boolean uses_cpf, int fk_contract_contact, int fk_contract_info,
-            int fk_contract_dates, int fk_contract_values, int fk_contract_discount) {
-        this.idContract = idContract;
-        this.code_contract = code_contract;
-        this.name_contract = name_contract;
-        this.acronymEmployee = acronymEmployee;
-        this.research = research;
-        this.active = active;
-        this.uses_cpf = uses_cpf;
-        this.fk_contract_contact = fk_contract_contact;
-        this.fk_contract_info = fk_contract_info;
-        this.fk_contract_dates = fk_contract_dates;
-        this.fk_contract_values = fk_contract_values;
-        this.fk_contract_discount = fk_contract_discount;
-    }
-
-    public CreateContractEntity(int idInfos, String construction, String cap, String process, String info_pmoc,
-            int max_employee) {
-        this.idInfos = idInfos;
-        this.construction = construction;
-        this.cap = cap;
-        this.process = process;
-        this.info_pmoc = info_pmoc;
-        this.max_employee = max_employee;
-    }
-
-    public CreateContractEntity(int idContact, String address, int nro, String complement, int phone, String state,
-            String city, int cep, String email, String contact) {
-        this.idContact = idContact;
-        this.address = address;
-        this.nro = nro;
-        this.complement = complement;
-        this.phone = phone;
-        this.state = state;
-        this.city = city;
-        this.cep = cep;
-        this.email = email;
-        this.contact = contact;
-    }
-
-    public CreateContractEntity(int idValues, int value_identifier, String acronymValues, int bdi_service, int bdi_material,
-            int bdi_labor, boolean entry_table, boolean send_email) {
-        this.idValues = idValues;
-        this.value_identifier = value_identifier;
-        this.acronymValues = acronymValues;
-        this.bdi_service = bdi_service;
-        this.bdi_material = bdi_material;
-        this.bdi_labor = bdi_labor;
-        this.entry_table = entry_table;
-        this.send_email = send_email;
-    }
-
-    public CreateContractEntity(int idDates, int date_identifier, Date date_initial, Date date_limit, Date date_guarantee,
-            Date date_proposal, Date date_budget, Date date_tables) {
-        this.idDates = idDates;
-        this.date_identifier = date_identifier;
-        this.date_initial = date_initial;
-        this.date_limit = date_limit;
-        this.date_guarantee = date_guarantee;
-        this.date_proposal = date_proposal;
-        this.date_budget = date_budget;
-        this.date_tables = date_tables;
-    }
-
-    public CreateContractEntity(int idDiscount, int disc_identifier, int disc_service, int disc_transport,
-            int disc_tranp_employee, int disc_labor, int disc_material, int disc_field) {
-        this.idDiscount = idDiscount;
-        this.disc_identifier = disc_identifier;
-        this.disc_service = disc_service;
-        this.disc_transport = disc_transport;
-        this.disc_tranp_employee = disc_tranp_employee;
-        this.disc_labor = disc_labor;
-        this.disc_material = disc_material;
-        this.disc_field = disc_field;
-    }
-
-    public CreateContractEntity(int idRh, int rh_identifier, Date hour_limit, Date minutes_limit, int days_first_exp,
+            int max_employee, String address, int nro, String complement, int phone, String state, String city, int cep,
+            String email, String contact, int value_identifier, String acronymValues, int bdi_service, int bdi_material,
+            int bdi_labor, boolean entry_table, boolean send_email, int date_identifier, Date date_initial,
+            Date date_limit, Date date_guarantee, Date date_proposal, Date date_budget, Date date_tables,
+            int disc_identifier, int disc_service, int disc_transport, int disc_tranp_employee, int disc_labor,
+            int disc_material, int disc_field, int rh_identifier, int hour_limit, int minutes_limit, int days_first_exp,
             int days_second_exp, Date data_init, boolean pay_extra_hour, boolean bank_hours_compens,
             boolean manual_stitch, boolean pays_breakfast) {
-        this.idRh = idRh;
+        this.code_contract = code_contract;
+        this.name_contract = name_contract;
+        this.acronymEmployee = acronymEmployee;
+        this.research = research;
+        this.active = active;
+        this.uses_cpf = uses_cpf;
+        this.construction = construction;
+        this.cap = cap;
+        this.process = process;
+        this.info_pmoc = info_pmoc;
+        this.max_employee = max_employee;
+        this.address = address;
+        this.nro = nro;
+        this.complement = complement;
+        this.phone = phone;
+        this.state = state;
+        this.city = city;
+        this.cep = cep;
+        this.email = email;
+        this.contact = contact;
+        this.value_identifier = value_identifier;
+        this.acronymValues = acronymValues;
+        this.bdi_service = bdi_service;
+        this.bdi_material = bdi_material;
+        this.bdi_labor = bdi_labor;
+        this.entry_table = entry_table;
+        this.send_email = send_email;
+        this.date_identifier = date_identifier;
+        this.date_initial = date_initial;
+        this.date_limit = date_limit;
+        this.date_guarantee = date_guarantee;
+        this.date_proposal = date_proposal;
+        this.date_budget = date_budget;
+        this.date_tables = date_tables;
+        this.disc_identifier = disc_identifier;
+        this.disc_service = disc_service;
+        this.disc_transport = disc_transport;
+        this.disc_tranp_employee = disc_tranp_employee;
+        this.disc_labor = disc_labor;
+        this.disc_material = disc_material;
+        this.disc_field = disc_field;
         this.rh_identifier = rh_identifier;
         this.hour_limit = hour_limit;
         this.minutes_limit = minutes_limit;
@@ -525,11 +353,11 @@ public class CreateContractEntity {
         return rh_identifier;
     }
 
-    public Date getHour_limit() {
+    public int getHour_limit() {
         return hour_limit;
     }
 
-    public Date getMinutes_limit() {
+    public int getMinutes_limit() {
         return minutes_limit;
     }
 
@@ -561,6 +389,4 @@ public class CreateContractEntity {
         return pays_breakfast;
     }
 
-
 }
-    
